@@ -26,8 +26,8 @@ To set up the project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/resume-category-prediction.git
-    cd resume-category-prediction
+    git clone https://github.com/shanmathig/nlp_resume_screener.git
+    cd nlp_resume_screener
     ```
 
 2. Create and activate a virtual environment:
