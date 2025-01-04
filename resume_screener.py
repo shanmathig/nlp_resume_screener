@@ -5,7 +5,7 @@
 
 # Understanding Our Dataset
 
-# In[115]:
+# In[137]:
 
 
 import numpy as np
@@ -15,26 +15,26 @@ import seaborn as sns
 
 
 
-# In[116]:
+# In[138]:
 
 
 df = pd.read_csv('ResumeDataset.csv')
 df.head()
 
 
-# In[117]:
+# In[139]:
 
 
 df.shape
 
 
-# In[118]:
+# In[140]:
 
 
 df['Category'].value_counts() # number of resumes per category
 
 
-# In[119]:
+# In[141]:
 
 
 plt.figure(figsize= (15,5))
@@ -42,7 +42,7 @@ sns.countplot(df['Category'])
 plt.show()
 
 
-# In[120]:
+# In[142]:
 
 
 counts = df['Category'].value_counts()
@@ -53,7 +53,7 @@ plt.pie(counts,labels=labels)
 
 # Cleaning The Resume Data
 
-# In[121]:
+# In[143]:
 
 
 df['Resume'][0]
@@ -61,7 +61,7 @@ df['Resume'][0]
 
 # Cleaning Data: URLs, hashtags, mentions, special letters, punctuation
 
-# In[122]:
+# In[144]:
 
 
 import re
@@ -84,13 +84,13 @@ def cleanResume(txt):
     return cleanTxt
 
 
-# In[123]:
+# In[145]:
 
 
 cleanResume("my ### #shan&mathi site is http://helowrld and access it @gmail.com")
 
 
-# In[124]:
+# In[146]:
 
 
 # Create a new column 'Cleaned_Resume' with the cleaned version
@@ -102,7 +102,7 @@ print(df[['Resume', 'Cleaned_Resume']].head())
 
 # Resume Words -> Categories!
 
-# In[125]:
+# In[147]:
 
 
 import sklearn
@@ -110,7 +110,7 @@ from sklearn.preprocessing import LabelEncoder
 
 
 
-# In[126]:
+# In[148]:
 
 
 le = LabelEncoder()
@@ -123,7 +123,7 @@ df.Category.unique()
 
 # Vectorization
 
-# In[127]:
+# In[149]:
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -133,7 +133,7 @@ tfidf.fit(df['Resume'])
 requiredText = tfidf.transform(df['Resume'])
 
 
-# In[128]:
+# In[150]:
 
 
 df
@@ -141,25 +141,25 @@ df
 
 # Splitting
 
-# In[129]:
+# In[151]:
 
 
 from sklearn.model_selection import train_test_split
 
 
-# In[130]:
+# In[152]:
 
 
 x_train, x_test, y_train, y_test = train_test_split(requiredText, df['Category'], test_size=0.2, random_state=42)
 
 
-# In[131]:
+# In[153]:
 
 
 x_train.shape # 80%
 
 
-# In[132]:
+# In[154]:
 
 
 x_test.shape # 20%
@@ -167,7 +167,7 @@ x_test.shape # 20%
 
 # Training The Model
 
-# In[133]:
+# In[155]:
 
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -185,7 +185,7 @@ print(accuracy_score(y_test,ypred))
 
 # Now that our model works with accuracy, let's create the prediction system!
 
-# In[134]:
+# In[156]:
 
 
 # Save data into 3 new files to reload later without having to vectorize again
@@ -195,7 +195,7 @@ pickle.dump(tfidf, open('tfidf.pkl', 'wb'))
 pickle.dump(clf, open('clf.pkl', 'wb'))
 
 
-# In[135]:
+# In[157]:
 
 
 myresume = """
@@ -230,7 +230,7 @@ Languages:
 """
 
 
-# In[136]:
+# In[158]:
 
 
 import pickle
